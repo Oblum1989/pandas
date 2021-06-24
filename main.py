@@ -96,5 +96,5 @@ def graficar_regresion_exponencial():
 
 
 #graficar_regresion_lineal()
-graficar_regresion_logaritmica()
-#graficar_regresion_exponencial()
+#graficar_regresion_logaritmica()
+graficar_regresion_exponencial()
