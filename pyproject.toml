@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "repl_python3_beta_panda"
+version = "0.1.0"
+description = ""
+authors = ["Oblum1989 <<>>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pandas = "^1.2.5"
+xlrd = "^2.0.1"
+openpyxl = "^3.0.7"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
