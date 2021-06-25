@@ -2,14 +2,15 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-contagios = pd.read_excel('Intro2021.xlsx', sheet_name='Lineal')
-
+contagios = pd.read_excel('Intro2021.xlsx', sheet_name ='Lineal')
+contagios_logaritmica = pd.read_excel('Intro2021.xlsx', sheet_name='Logaritmica')
+contagios_exponencial = pd.read_excel('Intro2021.xlsx', sheet_name='Exponencial')
 def lineal(x,m,b):
   y=m*x+b
   return y
 
 def logaritmica(x,a,b):
-  y = a * (np.log(x)) + b
+  y = (a * (np.log(x))) + b
   return y
 
 def exponencial(x,a,b):
@@ -79,16 +80,16 @@ def graficar_regresion_lineal():
   plt.show()
 
 def graficar_regresion_logaritmica():
-  a,b= regresion_logaritmica(contagios['Tiempo'],contagios['Contagios'])
-  ejex= np.linspace(0,30,100)
+  a,b= regresion_logaritmica(contagios_logaritmica['TIEMPO'],contagios_logaritmica['CONTAGIOS'])
+  ejex= np.linspace(0,30,20)
   ejey= logaritmica(ejex,a,b)
   contagios.plot(kind='scatter',x='Tiempo',y='Contagios',title= 'CONTAGIOS CUCUTA',color='y')
   plt.plot(ejex,ejey)
   plt.show()
 
 def graficar_regresion_exponencial():
-  a,b= regresion_exponencial(contagios['Tiempo'],contagios['Contagios'])
-  ejex= np.linspace(0,30,100)
+  a,b= regresion_exponencial(contagios_exponencial['TIEMPO'],contagios_exponencial['CONTAGIOS'])
+  ejex= np.linspace(0,30,20)
   ejey= exponencial(ejex,a,b)
   contagios.plot(kind='scatter',x='Tiempo',y='Contagios',title= 'CONTAGIOS CUCUTA',color='y')
   plt.plot(ejex,ejey)
