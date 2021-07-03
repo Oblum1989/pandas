@@ -83,7 +83,7 @@ def graficar_regresion_logaritmica():
   a,b= regresion_logaritmica(contagios_logaritmica['TIEMPO'],contagios_logaritmica['CONTAGIOS'])
   ejex= np.linspace(0,30,20)
   ejey= logaritmica(ejex,a,b)
-  contagios.plot(kind='scatter',x='Tiempo',y='Contagios',title= 'CONTAGIOS CUCUTA',color='y')
+  contagios_logaritmica.plot(kind='scatter',x='TIEMPO',y='CONTAGIOS',title= 'CONTAGIOS CUCUTA',color='y')
   plt.plot(ejex,ejey)
   plt.show()
 
@@ -91,11 +91,40 @@ def graficar_regresion_exponencial():
   a,b= regresion_exponencial(contagios_exponencial['TIEMPO'],contagios_exponencial['CONTAGIOS'])
   ejex= np.linspace(0,30,20)
   ejey= exponencial(ejex,a,b)
-  contagios.plot(kind='scatter',x='Tiempo',y='Contagios',title= 'CONTAGIOS CUCUTA',color='y')
+  contagios_exponencial.plot(kind='scatter',x='TIEMPO',y='CONTAGIOS',title= 'CONTAGIOS CUCUTA',color='y')
   plt.plot(ejex,ejey)
   plt.show()
 
 
 #graficar_regresion_lineal()
 #graficar_regresion_logaritmica()
-graficar_regresion_exponencial()
+#graficar_regresion_exponencial()
+
+telFijo = pd.read_excel('Telefonia.xlsx', sheet_name ='Telefono_fijo')
+telTraficVoz = pd.read_excel('Telefonia.xlsx', sheet_name='Telefono_trafico_voz')
+
+print(telFijo.head())
+print(telFijo['LINEAS EN SERVICIO'].mean())
+print(telFijo['LINEAS EN SERVICIO'].describe())
+print(telFijo[['AÑO', 'LINEAS EN SERVICIO']].groupby('AÑO').count())
+print(telFijo[['AÑO', 'LINEAS EN SERVICIO']].groupby('AÑO').max())
+
+servicioAnual = telFijo[['AÑO', 'LINEAS EN SERVICIO']].groupby('AÑO').count()
+servicioAnual.plot.pie(subplots=True)
+
+print(telTraficVoz.head())
+print(telTraficVoz['CONSUMO PREPAGO ON-NET'].mean())
+print(telTraficVoz['CONSUMO PREPAGO OFF-NET'].mean())
+print(telTraficVoz['CONSUMO POSPAGO'].mean())
+print(telTraficVoz['INGRESOS OPERACIONALES'].max())
+print(telTraficVoz[['PROVEEDOR', 'INGRESOS OPERACIONALES']].groupby('PROVEEDOR').max())
+print(telTraficVoz[['PROVEEDOR', 'INGRESOS OPERACIONALES']].groupby('PROVEEDOR').sum())
+telTraficVoz['CONSUMO Total'] = telTraficVoz['CONSUMO PREPAGO ON-NET'] + telTraficVoz['CONSUMO PREPAGO OFF-NET'] + telTraficVoz['CONSUMO POSPAGO']
+print(telTraficVoz.head())
+print(telTraficVoz.groupby(['AÑO', 'PROVEEDOR'])['INGRESOS OPERACIONALES'].sum())
+
+ingresEmpresa = telTraficVoz[['PROVEEDOR', 'INGRESOS OPERACIONALES']].groupby('PROVEEDOR').sum()
+ingresEmpresa.plot.bar()
+plt.show()
+
+
