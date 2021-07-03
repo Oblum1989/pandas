@@ -106,9 +106,8 @@ telTraficVoz = pd.read_excel('Telefonia.xlsx', sheet_name='Telefono_trafico_voz'
 print(telFijo.head())
 print(telFijo['LINEAS EN SERVICIO'].mean())
 print(telFijo['LINEAS EN SERVICIO'].describe())
-print(telFijo[['AÑO', 'LINEAS EN SERVICIO']].groupby('AÑO').count())
+print(telFijo[['AÑO', 'LINEAS EN SERVICIO']].groupby('AÑO').sum())
 print(telFijo[['AÑO', 'LINEAS EN SERVICIO']].groupby('AÑO').max())
-
 servicioAnual = telFijo[['AÑO', 'LINEAS EN SERVICIO']].groupby('AÑO').count()
 servicioAnual.plot.pie(subplots=True)
 
